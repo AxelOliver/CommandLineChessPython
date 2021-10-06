@@ -65,12 +65,31 @@ class Board:
                     elif y == 0 or y == 7:
                         self.board[x][y] = Rook("W")
 
+    def convert_move(self, current_pos, new_pos):
+        pass
 
-
-
-        for i in range(8):
-            self.board[6][i] = Pawn("W")
-
+    def validate_notation(self, user_move):
+        valid_numbers = "12345678"
+        valid_letters = "abcdefgh"
+        if len(user_move) != 2:
+            return False
+        if len(user_move) == 2:
+            if len(user_move[0]) != 2:
+                return False
+            elif not all(x in valid_letters for x in user_move[0][0]):
+                return False
+            elif not all(x in valid_numbers for x in user_move[0][1]):
+                return False
+            elif user_move[0] == user_move[1]:
+                return False
+            elif len(user_move[1]) != 2:
+                return False
+            elif not all(x in valid_letters for x in user_move[1][0]):
+                return False
+            elif not all(x in valid_numbers for x in user_move[1][1]):
+                return False
+            else:
+                return True
 
 
 if __name__ == '__main__':
