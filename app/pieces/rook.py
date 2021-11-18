@@ -41,7 +41,7 @@ class Rook(Piece):
                 return False, "Can't move in place"
             else:
                 for i in range(start[1] + left_right, end[1], left_right):
-                    if board.board[0][i] is not None:
+                    if board.board[end[0]][i] is not None:
                         return False, "Piece in the way"
             if board.board[end[0]][end[1]] is not None:
                 if board.board[end[0]][end[1]].side != self.side:

@@ -16,7 +16,7 @@ class Board:
         self.turn = "White"
 
     def __str__(self):
-        string = ""
+        string = "   A  B  C  D  E  F  G  H\n"
         for x in range(8):
             string += f"{8 - x} "
             for y in range(8):
@@ -35,6 +35,7 @@ class Board:
                 else:
                     string += f" {self.board[x][y]} "
             string += Style.RESET_ALL
+            string += f" {8 - x}"
             string += "\n"
         string += "   A  B  C  D  E  F  G  H"
         return string
@@ -69,6 +70,8 @@ class Board:
                 elif x == 7:
                     if y == 3:
                         self.board[x][y] = Queen("White")
+                    elif y == 2 or y == 5:
+                        self.board[x][y] = Bishop("White")
                     elif y == 4:
                         self.board[x][y] = King("White")
                     elif y == 0 or y == 7:

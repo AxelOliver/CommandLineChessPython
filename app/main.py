@@ -1,4 +1,5 @@
 from app.board import Board
+from app.writeToFile import write_to_file
 from copy import deepcopy
 
 if __name__ == '__main__':
@@ -10,6 +11,7 @@ if __name__ == '__main__':
     checkmate = False
     stalemate = False
     while not checkmate or not stalemate:
+        write_to_file(board.board, board.turn)
         previous_state = deepcopy(board)
         print(f"{board.turn} to move")
         user_move = input("Enter your move: ").lower().split()
@@ -26,7 +28,6 @@ if __name__ == '__main__':
             continue
         board.move(user_move)
         if board.check(board.turn)[1]:
-            # check all king moves from here incase it's checkmate
             if board.checkmate(board.turn):
                 print(board)
                 print("CHECKMATE!")
@@ -48,7 +49,4 @@ if __name__ == '__main__':
             board.turn = "Black"
         else:
             board.turn = "White"
-        # check if it puts you in check
-        # will have a safe board to revert to and a board with move made, then check if any piece can take the king
-        # on the updated board
         print(board)
