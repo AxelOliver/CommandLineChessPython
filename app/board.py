@@ -273,6 +273,8 @@ class Board:
                 return False, "King not in position"
 
     def check(self, turn):
+        # first boolean returned is if the player is making an illegal move on their own turn (that puts them in check)
+        # second boolean returned indicates if they have just been put in check by opposition
         white_king = None
         black_king = None
         for j in range(8):
@@ -282,6 +284,7 @@ class Board:
                         white_king = [j, i]
                     else:
                         black_king = [j, i]
+        # Edge case of no king is needed for when doing checkmate method
         if white_king is None or black_king is None:
             return False, "King is none"
         else:
@@ -301,6 +304,10 @@ class Board:
         return False, False
 
     def checkmate(self, turn):
+        # checkmate iterates through every piece on own side and sees if they can block a check
+        # (validate_move has a check check)
+        # can improve efficiency by only iterating through legal paths of each piece instead of every position on the
+        # board, and stopping iteration of that direction if validate_move returns a piece being in their path
         if self.turn == "White":
             self.turn = "Black"
         else:
